@@ -13,13 +13,19 @@ function Register() {
   const [values, setValues] = useState(initialState);
 
   const handleChange = (e) => {
-    console.log(e.target);
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues({ ...values, [name]: value });
   };
 
   const onSubmit = (e) => {
     e.preventDafault();
+    const { name, password, email, isMember } = values;
 
-    console.log(e.target);
+    /*  Check email and password but, if is member is false then also check for name*/
+    if (!email || !password || (!isMember && !name)) {
+      console.log("Please fill out all fields");
+    }
   };
 
   const toggleMember = () => {
