@@ -27,7 +27,7 @@ function Register() {
     e.preventDefault();
     const { name, password, email, isMember } = values;
 
-    /*  Check email and password but, if is member is false then also check for name*/
+    /*  Check email and password but, if isMember is false then also check for name*/
     if (!email || !password || (!isMember && !name)) {
       toast.error("Please fill out all fields");
       return;
