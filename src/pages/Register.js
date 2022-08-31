@@ -72,7 +72,7 @@ function Register() {
           value={values.password}
           handleChange={handleChange}
         />
-        <button className="btn btn-block" type="submit">
+        <button className="btn btn-block" type="submit" disabled={isLoading}>
           Submit
         </button>
         <p>
