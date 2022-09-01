@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Stats />} />
           <Route path="all-jobs" element={<AllJobs />} />
-          <Route path="add-jobs" element={<AddJob />} />
+          <Route path="add-job" element={<AddJob />} />
           <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="landing" element={<Landing />} />
