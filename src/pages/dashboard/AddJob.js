@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { toast } from "react-toastify";
 import Wrapper from "../../assets/css_structures/DashboardFormPage";
 import { FormRow, FormRowSelect } from "./../../components";
@@ -21,7 +22,7 @@ const AddJob = () => {
     isEditing,
     editJob,
   } = useSelector((store) => store.job);
-
+  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -39,6 +40,10 @@ const AddJob = () => {
     const value = e.target.value;
     dispatch(handleChange({ name, value }));
   };
+
+  useEffect(() => {
+    dispatch(handleChange({ name: "jobLocation", value: user.location }));
+  }, []);
 
   return (
     <Wrapper>
