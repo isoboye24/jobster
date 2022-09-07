@@ -3,10 +3,16 @@ import Wrapper from "../assets/css_structures/JobsContainer";
 import Job from "./Job";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "./Loading";
+import { getAllJobs } from "../features/allJobs/allJobsSlice";
 
 const JobsContainer = () => {
   const { jobs, isLoading } = useSelector((state) => state.allJobs);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllJobs());
+  }, []);
+
   if (isLoading) {
     return (
       <Wrapper>
@@ -22,6 +28,7 @@ const JobsContainer = () => {
       </Wrapper>
     );
   }
+
   return (
     <Wrapper>
       <h5>Jobs info</h5>
