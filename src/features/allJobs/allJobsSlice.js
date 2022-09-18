@@ -51,17 +51,24 @@ const allJobsSlice = createSlice({
   name: "allJobs",
   initialState,
   reducers: {
+    // If we will pass in a value (or param.) we pass 'payload' in the reducer
     showLoading: (state) => {
       state.isLoading = true;
     },
     hideLoading: (state) => {
       state.isLoading = false;
     },
+    // Here the payload is specified
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
     },
     clearFilters: (state) => {
       return { ...state, ...initialFilterState };
+    },
+    //  Here the payload is not specified. So, whatever we pass as a param will equal to
+    // the page number
+    changePage: (state, { payload }) => {
+      state.page = payload;
     },
   },
   extraReducers: {
@@ -95,6 +102,11 @@ const allJobsSlice = createSlice({
   },
 });
 
-export const { showLoading, hideLoading, handleChange, clearFilters } =
-  allJobsSlice.actions;
+export const {
+  showLoading,
+  hideLoading,
+  handleChange,
+  clearFilters,
+  changePage,
+} = allJobsSlice.actions;
 export default allJobsSlice.reducer;

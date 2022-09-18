@@ -1,9 +1,12 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "../assets/css_structures/PageBtnContainer";
+import { changePage } from "../features/allJobs/allJobsSlice";
 
 const PageBtnContainer = () => {
-  const { page, numOfPages } = useSelector((state) => state.allJobs);
+  const { page, numOfPages, pageNumber } = useSelector(
+    (state) => state.allJobs
+  );
   const dispatch = useDispatch();
 
   const pages = Array.from({ length: numOfPages }, (_1, index) => {
@@ -11,10 +14,18 @@ const PageBtnContainer = () => {
   });
 
   const nextPage = () => {
-    console.log("next page");
+    let newPage = page + 1;
+    if (newPage > numOfPages) {
+      newPage = 1;
+    }
+    dispatch(changePage(newPage));
   };
   const prevPage = () => {
-    console.log("prev page");
+    let newPage = page - 1;
+    if (newPage < 1) {
+      newPage = numOfPages;
+    }
+    dispatch(changePage(newPage));
   };
   return (
     <Wrapper>
@@ -27,7 +38,7 @@ const PageBtnContainer = () => {
             <button
               type="button"
               key={pageNumber}
-              onClick={() => console.log("change page")}
+              onClick={() => dispatch(changePage(pageNumber))}
               className={pageNumber === page ? "pageBtn active" : "pageBtn"}
             >
               {pageNumber}
