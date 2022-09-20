@@ -67,6 +67,7 @@ const allJobsSlice = createSlice({
     },
     // Here the payload is specified
     handleChange: (state, { payload: { name, value } }) => {
+      state.page = 1;
       state[name] = value;
     },
     clearFilters: (state) => {
