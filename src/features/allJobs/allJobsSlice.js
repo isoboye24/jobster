@@ -1,13 +1,13 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import { showStatsThunk, getAllJobsThunk } from "./allJobsThunk";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { showStatsThunk, getAllJobsThunk } from './allJobsThunk';
 
 const initialFilterState = {
-  search: "",
-  searchStatus: "all",
-  searchType: "all",
-  sort: "latest",
-  sortOptions: ["latest", "oldest", "a-z", "z-a"],
+  search: '',
+  searchStatus: 'all',
+  searchType: 'all',
+  sort: 'latest',
+  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 };
 
 const initialState = {
@@ -21,21 +21,19 @@ const initialState = {
   ...initialFilterState,
 };
 
-export const getAllJobs = createAsyncThunk("allJobs/getJobs", getAllJobsThunk);
-export const showStats = createAsyncThunk("allJobs/showStats", showStatsThunk);
+export const getAllJobs = createAsyncThunk('allJobs/getJobs', getAllJobsThunk);
+export const showStats = createAsyncThunk('allJobs/showStats', showStatsThunk);
 
 const allJobsSlice = createSlice({
-  name: "allJobs",
+  name: 'allJobs',
   initialState,
   reducers: {
-    // If we will pass in a value (or param.) we pass 'payload' in the reducer
     showLoading: (state) => {
       state.isLoading = true;
     },
     hideLoading: (state) => {
       state.isLoading = false;
     },
-    // Here the payload is specified
     handleChange: (state, { payload: { name, value } }) => {
       state.page = 1;
       state[name] = value;
@@ -43,15 +41,12 @@ const allJobsSlice = createSlice({
     clearFilters: (state) => {
       return { ...state, ...initialFilterState };
     },
-    //  Here the payload is not specified. So, whatever we pass as a param will equal to
-    // the page number
     changePage: (state, { payload }) => {
       state.page = payload;
     },
     clearAllJobsState: (state) => initialState,
   },
   extraReducers: {
-    // Response to the allJobs
     [getAllJobs.pending]: (state) => {
       state.isLoading = true;
     },
@@ -65,7 +60,6 @@ const allJobsSlice = createSlice({
       state.isLoading = false;
       toast.error(payload);
     },
-    // Response to the show stats
     [showStats.pending]: (state) => {
       state.isLoading = true;
     },
